@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,24 +15,15 @@ put:actualizar
 |
 */
 
-Route::get('/', function () {
+// Creacion de grupo de rutas para controlar las rutas
 
-    return view('home');
-})->name('home');
+Route::controller(PageController::class)->group(function () {
 
-Route::get('blog', function () {
-    $posts = [
-        ['id' => 1, 'title' => 'PHP', 'slug' => 'php'],
-        ['id' => 2, 'title' => 'Laravel', 'slug' => 'laravel'],
-    ];
+    // En estas lineas podemos encontras las rutas y los metodos
 
-    return view('blog', ['posts' => $posts]);
-})->name('blog');
+    Route::get('/', 'home')->name('home');
 
+    Route::get('blog', 'blog')->name('blog');
 
-Route::get('blog/{slug}', function ($slug) {
-
-    $post = $slug;
-
-    return view('post', ['post' => $post]);
-})->name('post');
+    Route::get('blog/{slug}', 'post')->name('post');
+});
