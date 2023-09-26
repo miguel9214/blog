@@ -11,7 +11,10 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
+    { 
+        // Generador de datos falsos, cantidad
+         
+
         \App\Models\User::factory()->create();
         \App\Models\Post::factory(80)->create();
 

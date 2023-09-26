@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,11 +15,13 @@ class PostFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition(): array   
     {
+        // Datos semillas, estructura inicial de datos falsos
+
         return [
-            'title'=>$this->faker->sentence(),
-            'slug'=>$this->faker->sentence(),
+            'title'=> $title = $this->faker->sentence(),
+            'slug'=>Str::slug($title),
             'body'=>$this->faker->text(2200),
         ];
     }
