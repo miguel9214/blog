@@ -14,7 +14,7 @@ class Post extends Model
 
     public function user()
     {
-        // Una pubicacion pertence a un unico usuario
+        // Una pubLicacion pertence a un unico usuario
         return $this->belongsTo(User::class);
 
     }

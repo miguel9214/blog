@@ -17,13 +17,14 @@ class PageController extends Controller
 
     public function blog(){
 
-        // Eloquent nos ayuda a trabajar con los datos como su fueran objetos de php
+        // Eloquent nos ayuda a trabajar con los datos como si fueran objetos de php
 
         // $posts = Post::get();
 
         $posts = Post::latest()->paginate();
 
         return view('blog', ['posts' => $posts]);
+        
         
     }
 

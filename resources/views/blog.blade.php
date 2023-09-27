@@ -9,10 +9,10 @@
                 {{ $post->title }}
             </a>
             <br>
-            
             <span>{{$post->user->name}}</span>
         </p>
     @endforeach
 
+    {{-- Esto me ayuda a paginar los datos que vienen por consulta --}}
     {{$posts->links()}}
 @endsection
