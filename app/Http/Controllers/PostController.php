@@ -23,6 +23,35 @@ class PostController extends Controller
         );
     }
 
+
+    public function create(Post $post)
+    {
+        return view('posts.create', ['post' => $post]);
+    }
+
+    public function store(Request $request){
+
+        $request->validate([
+            'title'=>'required',
+            'slug'=>'required|unique:posts,slug',
+            'body'=>'required'
+        ]);
+
+        $post=$request->user()->posts()->create([
+            'title'=>$request->title,
+            'slug'=>$request->title,
+            'body'=>$request->body,
+           ]);
+        
+        return redirect()->route('posts.edit',$post);
+
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', ['post' => $post]);
+    }
+
     //  Destroy es la ruta y delete es el metodo
 
     public function destroy(Post $post)
