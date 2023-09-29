@@ -32,22 +32,22 @@ class PostController extends Controller
         return view('posts.create', ['post' => $post]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        $request->validate([
-            'title'=>'required',
-            'slug'=>'required|unique:posts,slug',
-            'body'=>'required'
+        // $request->validate([
+        //     'title' => 'required',
+        //     'slug' => 'required|unique:posts,slug',
+        //     'body' => 'required'
+        // ]);
+
+        $post = $request->user()->posts()->create([
+            'title' => $title = $request->title,
+            'slug' => Str::slug($title),
+            'body' => $request->body,
         ]);
 
-        $post=$request->user()->posts()->create([
-            'title'=>$title=$request->title,
-            'slug'=>Str::slug($title),
-            'body'=>$request->body,
-           ]);
-        
-        return redirect()->route('posts.edit',$post);
-
+        return redirect()->route('posts.edit', $post);
     }
 
     public function edit(Post $post)

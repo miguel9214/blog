@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900">
                     <form action="{{route('posts.store')}}" method="POST">
                         @include('posts._form')
+                        
                     </form>
                 </div>
             </div>
