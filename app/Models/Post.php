@@ -10,6 +10,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    // Creacion de aisgnacion maxima de datos
+    
     protected $fillable = [
         'title',
         'slug',
