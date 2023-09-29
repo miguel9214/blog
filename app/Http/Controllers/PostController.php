@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\App;
 
-use App\Models\Post;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
+
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -38,8 +41,8 @@ class PostController extends Controller
         ]);
 
         $post=$request->user()->posts()->create([
-            'title'=>$request->title,
-            'slug'=>$request->title,
+            'title'=>$title=$request->title,
+            'slug'=>Str::slug($title),
             'body'=>$request->body,
            ]);
         
