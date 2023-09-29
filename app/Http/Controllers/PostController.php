@@ -13,6 +13,8 @@ use App\Models\Post;
 class PostController extends Controller
 {
 
+    // Listado de publicacion
+
     public function index()
     {
         // La primera parte de la funcion es la ruta con el metodo que me permite listar,
@@ -26,36 +28,62 @@ class PostController extends Controller
         );
     }
 
+    // Formulario de crear
 
     public function create(Post $post)
     {
         return view('posts.create', ['post' => $post]);
     }
 
+    //Funcion guardar
+
     public function store(Request $request)
     {
-
-        // $request->validate([
-        //     'title' => 'required',
-        //     'slug' => 'required|unique:posts,slug',
-        //     'body' => 'required'
-        // ]);
+        // Funcion de validacion
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:posts,slug',
+            'body' => 'required'
+        ]);
 
         $post = $request->user()->posts()->create([
-            'title' => $title = $request->title,
-            'slug' => Str::slug($title),
+            'title'=>$request->title,
+            'slug' =>$request->slug,
             'body' => $request->body,
         ]);
 
         return redirect()->route('posts.edit', $post);
     }
 
-    public function edit(Post $post)
+    // Funcion editar
+
+    public function edit(Post $post, Request $request)
     {
         return view('posts.edit', ['post' => $post]);
     }
 
-    //  Destroy es la ruta y delete es el metodo
+
+    public function update(Post $post, Request $request)
+    {
+
+        // Funcion de validacion
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required|unique:posts,slug'. $post,
+            'body' => 'required'
+        ]);
+
+        $post->update([
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'body' => $request->body,
+        ]);
+
+        return view('posts.edit', ['post' => $post]);
+    }
+
+
+    // Funcion eliminar
 
     public function destroy(Post $post)
     {
