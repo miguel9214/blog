@@ -69,7 +69,7 @@ class PostController extends Controller
         // Funcion de validacion
         $request->validate([
             'title' => 'required',
-            'slug' => 'required|unique:posts,slug' . $post,
+            'slug' => 'required|unique:posts,slug,' . $post->id,
             'body' => 'required',
         ]);
 
