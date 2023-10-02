@@ -47,30 +47,30 @@ class PostController extends Controller
         ]);
 
         $post = $request->user()->posts()->create([
-            'title'=>$request->title,
-            'slug' =>$request->slug,
+            'title' => $request->title,
+            'slug' => $request->slug,
             'body' => $request->body,
         ]);
 
         return redirect()->route('posts.edit', $post);
     }
 
-    // Funcion editar
+    // Formulario de editar
 
-    public function edit(Post $post, Request $request)
+    public function edit(Post $post)
     {
         return view('posts.edit', ['post' => $post]);
     }
 
-
-    public function update(Post $post, Request $request)
+    // Funcion de editar
+    public function update( Request $request ,Post $post)
     {
 
         // Funcion de validacion
         $request->validate([
             'title' => 'required',
-            'slug' => 'required|unique:posts,slug'. $post,
-            'body' => 'required'
+            'slug' => 'required|unique:posts,slug' . $post,
+            'body' => 'required',
         ]);
 
         $post->update([
