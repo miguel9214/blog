@@ -6,14 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog</title>
+
+    {{-- Esto sirve para agregar estilos css y js a mis archivos --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
+    <div>
+        <header>
+            <div>
+                <a href=""></a>
+                <form action="">
+                    <input type="text">
+                </form>
+            </div>
+
+        </header>
+    </div>
+
     <p>
         <a href="{{ route('home') }}">Home</a>
         <a href="{{ route('blog') }}">Blog</a>
 
-        {{-- Con eso verfico si he iniciado sesion o no --}}
+        {{-- Con eso verifico si he iniciado sesion o no --}}
 
         @auth
             <a href="{{ route('dashboard') }}">Dashboard</a>
