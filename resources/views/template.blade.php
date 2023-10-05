@@ -6,38 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog</title>
-
     {{-- Esto sirve para agregar estilos css y js a mis archivos --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
-    <div>
-        <header>
-            <div>
-                <a href=""></a>
-                <form action="">
-                    <input type="text">
+    <div class="container px-4 mx-auto">
+
+        <header class="flex items-center justify-between py-4">
+            <div class="flex items-center flex-grow gap-4">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('images/blog.png') }}" class="h-12" alt="">
+                </a>
+                <form action="{{route('home')}}" method="GET" class="flex-grow">
+                    <input type="text" placeholder="Buscar" name="search" value="{{request('search')}}"
+                    class="w-1/2 px-4 py-2 border border-gray-200 rounded">
                 </form>
             </div>
+            {{-- Con eso verifico si he iniciado sesion o no --}}
+
+            @auth
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+            @endauth
 
         </header>
+
+        <div class="h-px mb-8 opacity-60"
+            style="
+             background: linear-gradient(to right,
+           rgba(200,200,200,0) 0%,
+           rgba(200,200,200,1) 30%,
+           rgba(200,200,200,1) 70%,
+           rgba(200,200,200,0) 100%
+            );
+             ">
+        </div>
+
+        @yield('content')
+
     </div>
-
-    <p>
-        <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('blog') }}">Blog</a>
-
-        {{-- Con eso verifico si he iniciado sesion o no --}}
-
-        @auth
-            <a href="{{ route('dashboard') }}">Dashboard</a>
-        @else
-            <a href="{{ route('login') }}">Login</a>
-        @endauth
+    <p class="py-16 ">
+        <img src="{{ asset('images/blog.png') }}" class="h-12 mx-auto">
     </p>
-    <hr>
-    @yield('content')
+
 </body>
 
 </html>

@@ -48,4 +48,4 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('posts', PostController::class)->except('show');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

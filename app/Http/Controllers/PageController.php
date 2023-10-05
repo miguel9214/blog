@@ -8,30 +8,38 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
 
-    public function home(){
-
-        return view('home');
-
-    }
-
-
-    public function blog(){
+    public function home( Request $request)
+    {
 
         // Eloquent nos ayuda a trabajar con los datos como si fueran objetos de php
 
         // $posts = Post::get();
 
-        $posts = Post::latest()->paginate();
+        // Buscador dentro de la pagina home
 
-        return view('blog', ['posts' => $posts]);
-        
-        
+        $search=$request->search;
+
+        $posts = Post::where('title','LIKE',"%{$search}%")->latest()->paginate();
+
+        return view('home', ['posts' => $posts]);
     }
 
-    public function post( Post $post){
-    
+
+    // public function blog()
+    // {
+
+    //     // Eloquent nos ayuda a trabajar con los datos como si fueran objetos de php
+
+    //     // $posts = Post::get();
+
+    //     $posts = Post::latest()->paginate();
+
+    //     return view('blog', ['posts' => $posts]);
+    // }
+
+    public function post(Post $post)
+    {
 
         return view('post', ['post' => $post]);
     }
-    
 }
